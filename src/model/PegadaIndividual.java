@@ -12,6 +12,41 @@ public class PegadaIndividual {
 	private String complementoIndividual;
 	
 	
+	
+	public PegadaIndividual(int id, String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus,
+			int volLixo, double pegadaTotal, String cepIndividual, String complementoIndividual) {
+		super();
+		this.id = id;
+		this.nomeIndividual = nomeIndividual;
+		this.cpfIndividual = cpfIndividual;
+		this.tempCarro = tempCarro;
+		this.tempBus = tempBus;
+		this.volLixo = volLixo;
+		this.pegadaTotal = pegadaTotal;
+		this.cepIndividual = cepIndividual;
+		this.complementoIndividual = complementoIndividual;
+	}
+	
+	
+	public PegadaIndividual(String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus, int volLixo,
+			double pegadaTotal, String cepIndividual, String complementoIndividual) {
+		super();
+		this.nomeIndividual = nomeIndividual;
+		this.cpfIndividual = cpfIndividual;
+		this.tempCarro = tempCarro;
+		this.tempBus = tempBus;
+		this.volLixo = volLixo;
+		this.pegadaTotal = pegadaTotal;
+		this.cepIndividual = cepIndividual;
+		this.complementoIndividual = complementoIndividual;
+	}
+	
+	
+
+	public PegadaIndividual() {
+	}
+
+
 	public int getId() {
 		return id;
 	}
