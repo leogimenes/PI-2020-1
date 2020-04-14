@@ -15,6 +15,18 @@ CREATE SCHEMA IF NOT EXISTS `DBpegadapessoal` DEFAULT CHARACTER SET utf8 ;
 USE `DBpegadapessoal` ;
 
 -- -----------------------------------------------------
+-- Table `DBpegadapessoal`.`Bairro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DBpegadapessoal`.`Bairro` (
+  `idBairro` INT NOT NULL AUTO_INCREMENT,
+  `Nome_Bairro` VARCHAR(45) NOT NULL,
+  `Regiao` VARCHAR(45) NOT NULL,
+  `Volume_CO2` DOUBLE NOT NULL,
+  PRIMARY KEY (`idBairro`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `DBpegadapessoal`.`Pegada_Individual`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DBpegadapessoal`.`Pegada_Individual` (
@@ -27,26 +39,13 @@ CREATE TABLE IF NOT EXISTS `DBpegadapessoal`.`Pegada_Individual` (
   `Pegada_Total` DOUBLE NOT NULL,
   `CEP_Individual` VARCHAR(20) NOT NULL,
   `Complemento_Individual` VARCHAR(45) NOT NULL,
+  `Bairro_idBairro` INT NOT NULL,
   PRIMARY KEY (`idPegada_Individual`),
-  UNIQUE INDEX `CPF_Individual_UNIQUE` (`CPF_Individual` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DBpegadapessoal`.`Bairro`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DBpegadapessoal`.`Bairro` (
-  `idBairro` INT NOT NULL AUTO_INCREMENT,
-  `Nome_Bairro` VARCHAR(45) NOT NULL,
-  `Regiao` VARCHAR(45) NOT NULL,
-  `Volume_CO2` DOUBLE NOT NULL,
-  `Pegada_Individual_idPegada_Individual` INT NOT NULL,
-  `Area` DOUBLE NOT NULL,
-  PRIMARY KEY (`idBairro`),
-  INDEX `fk_Bairro_Pegada_Individual_idx` (`Pegada_Individual_idPegada_Individual` ASC) VISIBLE,
-  CONSTRAINT `fk_Bairro_Pegada_Individual`
-    FOREIGN KEY (`Pegada_Individual_idPegada_Individual`)
-    REFERENCES `DBpegadapessoal`.`Pegada_Individual` (`idPegada_Individual`)
+  UNIQUE INDEX `CPF_Individual_UNIQUE` (`CPF_Individual` ASC) VISIBLE,
+  INDEX `fk_Pegada_Individual_Bairro_idx` (`Bairro_idBairro` ASC) VISIBLE,
+  CONSTRAINT `fk_Pegada_Individual_Bairro`
+    FOREIGN KEY (`Bairro_idBairro`)
+    REFERENCES `DBpegadapessoal`.`Bairro` (`idBairro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
