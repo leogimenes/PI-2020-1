@@ -18,6 +18,7 @@ public class PegadaDAO {
 	private static final int PEGADA_TOTAL = 7;
 	private static final int CEP_INDIVIDUAL = 8;
 	private static final int COMPLEMENTO_INDIVIDUAL = 9;
+	private static final int ID_BAIRRO = 10;
 	
 	
 	public static void criar(PegadaIndividual to) {
@@ -78,7 +79,7 @@ public class PegadaDAO {
 	}
 	public static PegadaIndividual carregar(int id) {
 		PegadaIndividual to = new PegadaIndividual();
-		String sqlSelect = "SELECT id, nome, populacao, area FROM Pegada_Individual WHERE idPegada_Individual =?";
+		String sqlSelect = "SELECT idPegada_Individual, Nome_Individual, CPF_Individual, Temp_Carro, Temp_bus, Vol_Lixo, Pegada_Total, CEP_Individual, Complemento_Individual FROM Pegada_Individual WHERE idPegada_Individual =?";
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
 			stm.setInt(1, id);

@@ -10,11 +10,11 @@ public class PegadaIndividual {
 	private double pegadaTotal;
 	private String cepIndividual;
 	private String complementoIndividual;
-	
+	private int idBairro;
 	
 	
 	public PegadaIndividual(int id, String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus,
-			int volLixo, double pegadaTotal, String cepIndividual, String complementoIndividual) {
+			int volLixo, double pegadaTotal, String cepIndividual, String complementoIndividual, int idBairro) {
 		super();
 		this.id = id;
 		this.nomeIndividual = nomeIndividual;
@@ -25,11 +25,12 @@ public class PegadaIndividual {
 		this.pegadaTotal = pegadaTotal;
 		this.cepIndividual = cepIndividual;
 		this.complementoIndividual = complementoIndividual;
+		this.idBairro = idBairro;
 	}
 	
 	
 	public PegadaIndividual(String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus, int volLixo,
-			double pegadaTotal, String cepIndividual, String complementoIndividual) {
+			double pegadaTotal, String cepIndividual, String complementoIndividual, int idBairro) {
 		super();
 		this.nomeIndividual = nomeIndividual;
 		this.cpfIndividual = cpfIndividual;
@@ -39,6 +40,7 @@ public class PegadaIndividual {
 		this.pegadaTotal = pegadaTotal;
 		this.cepIndividual = cepIndividual;
 		this.complementoIndividual = complementoIndividual;
+		this.idBairro = idBairro;
 	}
 	
 	
@@ -112,7 +114,15 @@ public class PegadaIndividual {
 			System.out.println("O complemento não pode conter mais de 45 caracteres.");
 		else
 			this.complementoIndividual = complementoIndividual;
-	}	
+	}
+	
+	public int getIdBairro() {
+		return idBairro;
+	}
+
+	public void setIdBairro(int idBairro) {
+		this.idBairro = idBairro;
+	}
 	
 	@Override
 	public String toString() {

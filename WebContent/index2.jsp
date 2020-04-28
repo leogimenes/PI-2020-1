@@ -22,29 +22,48 @@
 
 		<form action="ManterPegada.do" method="post">
 			<div class="row">
-				<div class="form-group col-md-12">
+				<div class="form-group col-md-4">
 					<label for="NomeIndividual">Nome</label> <input type="text"
 						class="form-control" name="NomeIndividual" id="NomeIndividual"
 						required maxlength="100" placeholder="Nome completo">
 				</div>
 			</div>
-			
+
 			<div class="row">
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-3">
 					<label for="CPF_Individial">CPF</label> <input type="text"
 						class="form-control" name="CPF_Individual" id="CPF_Individual"
-						required maxlength="100" placeholder="123.456.789-xx">
+						required maxlength="14" pattern="[0-9]{3,}+.[0-9]{3,}+.[0-9]{3,}+-[0-9]{2,}"placeholder="123.456.789-xx">
 				</div>
-			
-				<div class="form-group col-md-6">
+			</div>
+
+
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label for="CEP">CEP</label> <input type="text"
+						class="form-control" name="CEP" id="CEP" required maxlength="9"
+						placeholder="CEP">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-4">
 					<label for="Bairro">Bairro</label> <input type="text"
-						class="form-control" name="Bairro" id="Bairro"
-						required maxlength="100" placeholder="Nome do bairro">
+						class="form-control" name="Bairro" id="Bairro" required
+						maxlength="100" placeholder="Nome do bairro">
 				</div>
-			</div>					
-			
+			</div>
+
+			<div id="actions" class="row">
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-primary" name="acao"
+						value="Incluir">Salvar</button>
+					<a href="index2.jsp" class="btn btn-default">Cancelar</a>
+				</div>
+			</div>
 		</form>
 	</div>
-
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
