@@ -13,8 +13,27 @@
 <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	<c:import url="Menu.jsp"/>
+	<c:import url="Menu.jsp" />
 	<div id="main" class="container">
+		<h2 class="page-header">Informações</h2>
+		<p class="lead">
+			<del>Teste</del>
+		</p>
+		<p>
+			<del>Teste</del>
+		</p>
+		<p>
+			<ins>Teste</ins>
+		</p>
+		<p>
+			<small>Teste</small>
+		</p>
+		<p>
+			<strong>Teste</strong>
+		</p>
+		<p>
+			<em>Teste</em>
+		</p>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
