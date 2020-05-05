@@ -50,7 +50,7 @@ public class PegadaDAO {
 	}
 
 	public static void atualizar(PegadaIndividual to) {
-		String sqlUpdate = "UPDATE Pegada_Individual SET Nome_Individual=?, CPF_Individual=?, Temp_Carro=?, Temp_bus=?, Vol_Lixo=?, Pegada_Total=?, CEP_Individual=?, Complemento_Individual=? WHERE idPegada_Individual=?";
+		String sqlUpdate = "UPDATE Pegada_Individual SET Nome_Individual=?, CPF_Individual=?, Temp_Carro=?, Temp_bus=?, Vol_Lixo=?, Pegada_Total=?, CEP_Individual=?, Complemento_Individual=?, Bairro_idBairro=? WHERE idPegada_Individual=?";
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlUpdate);) {
 			stm.setString(1, to.getNomeIndividual());
@@ -61,7 +61,8 @@ public class PegadaDAO {
 			stm.setDouble(6, to.getPegadaTotal());
 			stm.setString(7, to.getCepIndividual());
 			stm.setString(8, to.getComplementoIndividual());
-			stm.setInt(9, to.getId());
+			stm.setInt(9, to.getIdBairro());
+			stm.setInt(10, to.getId());
 			stm.execute();
 		} catch (Exception e) {
 			e.printStackTrace();

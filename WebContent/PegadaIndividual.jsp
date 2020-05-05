@@ -32,13 +32,13 @@
 		<div class="row">
 			<div class="col-md-6">
 				<p>
-					<strong>Populacao</strong>
+					<strong>Volume de Lixo</strong>
 				</p>
 				<p>${pegada.volLixo}</p>
 			</div>
 			<div class="col-md-6">
 				<p>
-					<strong>Area</strong>
+					<strong>Pegada Total</strong>
 				</p>
 				<p>${pegada.pegadaTotal}</p>
 			</div>
