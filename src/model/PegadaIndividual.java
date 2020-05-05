@@ -11,8 +11,8 @@ public class PegadaIndividual {
 	private String cepIndividual;
 	private String complementoIndividual;
 	private int idBairro;
-	
-	
+
+
 	public PegadaIndividual(int id, String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus,
 			int volLixo, double pegadaTotal, String cepIndividual, String complementoIndividual, int idBairro) {
 		super();
@@ -27,8 +27,8 @@ public class PegadaIndividual {
 		this.complementoIndividual = complementoIndividual;
 		this.idBairro = idBairro;
 	}
-	
-	
+
+
 	public PegadaIndividual(String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus, int volLixo,
 			double pegadaTotal, String cepIndividual, String complementoIndividual, int idBairro) {
 		super();
@@ -42,8 +42,8 @@ public class PegadaIndividual {
 		this.complementoIndividual = complementoIndividual;
 		this.idBairro = idBairro;
 	}
-	
-	
+
+
 
 	public PegadaIndividual() {
 	}
@@ -59,19 +59,13 @@ public class PegadaIndividual {
 		return nomeIndividual;
 	}
 	public void setNomeIndividual(String nomeIndividual) {
-		if(nomeIndividual.length() > 100)
-			System.out.println("O nome não pode conter mais do que 100 caracteres.");
-		else
-			this.nomeIndividual = nomeIndividual;
+		this.nomeIndividual = nomeIndividual;
 	}
 	public String getCpfIndividual() {
 		return cpfIndividual;
 	}
 	public void setCpfIndividual(String cpfIndividual) {
-		if(cpfIndividual.length() > 20)
-			System.out.println("O CPF não pode conter mais de 20 caracteres.");
-		else
-			this.cpfIndividual = cpfIndividual;
+		this.cpfIndividual = cpfIndividual;
 	}
 	public int getTempCarro() {
 		return tempCarro;
@@ -101,21 +95,15 @@ public class PegadaIndividual {
 		return cepIndividual;
 	}
 	public void setCepIndividual(String cepIndividual) {
-		if(cepIndividual.length() > 20)
-			System.out.println("O CEP não pode conter mais de 20 caracteres.");
-		else
-			this.cepIndividual = cepIndividual;
+		this.cepIndividual = cepIndividual;
 	}
 	public String getComplementoIndividual() {
 		return complementoIndividual;
 	}
 	public void setComplementoIndividual(String complementoIndividual) {
-		if(complementoIndividual.length() > 45)
-			System.out.println("O complemento não pode conter mais de 45 caracteres.");
-		else
-			this.complementoIndividual = complementoIndividual;
+		this.complementoIndividual = complementoIndividual;
 	}
-	
+
 	public int getIdBairro() {
 		return idBairro;
 	}
@@ -123,7 +111,7 @@ public class PegadaIndividual {
 	public void setIdBairro(int idBairro) {
 		this.idBairro = idBairro;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PegadaIndividual [id=" + id + ", nomeIndividual=" + nomeIndividual + ", cpfIndividual=" + cpfIndividual

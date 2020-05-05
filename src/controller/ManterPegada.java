@@ -38,7 +38,7 @@ public class ManterPegada extends HttpServlet {
 		
 		switch(acao) {
 		case "Incluir":
-			String pNome = request.getParameter("NomeIndividual");
+			String pNome = request.getParameter("nomeIndividual");
 			String pCpf = request.getParameter("CPF_Individual");
 			String pCep = request.getParameter("CEP");
 			int pBairro = Integer.parseInt(request.getParameter("Bairro"));

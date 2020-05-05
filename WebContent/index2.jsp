@@ -23,8 +23,8 @@
 		<form action="ManterPegada.do" method="post">
 			<div class="row">
 				<div class="form-group col-md-4">
-					<label for="NomeIndividual">Nome</label> <input type="text"
-						class="form-control" name="NomeIndividual" id="NomeIndividual"
+					<label for="nomeIndividual">Nome</label> <input type="text"
+						class="form-control" name="nomeIndividual" id="nomeIndividual"
 						required maxlength="100" placeholder="Nome completo">
 				</div>
 			</div>

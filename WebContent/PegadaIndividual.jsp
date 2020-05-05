@@ -26,7 +26,7 @@
 				<p>
 					<strong>Nome</strong>
 				</p>
-				<p>${pegada.nome}</p>
+				<p>${pegada.nomeIndividual}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -34,13 +34,13 @@
 				<p>
 					<strong>Populacao</strong>
 				</p>
-				<p>${pegada.populacao}</p>
+				<p>${pegada.volLixo}</p>
 			</div>
 			<div class="col-md-6">
 				<p>
 					<strong>Area</strong>
 				</p>
-				<p>${pegada.area}</p>
+				<p>${pegada.pegadaTotal}</p>
 			</div>
 		</div>
 		<hr />

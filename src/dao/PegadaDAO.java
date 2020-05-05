@@ -22,7 +22,7 @@ public class PegadaDAO {
 	
 	
 	public static void criar(PegadaIndividual to) {
-		String sqlInsert = "INSERT INTO Pegada_Individual(Nome_Individual, CPF_Individual, Temp_Carro, Temp_bus, Vol_Lixo, Pegada_Total, CEP_Individual, Complemento_Individual) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sqlInsert = "INSERT INTO Pegada_Individual(Nome_Individual, CPF_Individual, Temp_Carro, Temp_bus, Vol_Lixo, Pegada_Total, CEP_Individual, Complemento_Individual, Bairro_idBairro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlInsert);) {
 			stm.setString(1, to.getNomeIndividual());
@@ -33,6 +33,7 @@ public class PegadaDAO {
 			stm.setDouble(6, to.getPegadaTotal());
 			stm.setString(7, to.getCepIndividual());
 			stm.setString(8, to.getComplementoIndividual());
+			stm.setInt(9, to.getIdBairro());
 			stm.execute();
 			String sqlQuery = "SELECT LAST_INSERT_ID()";
 			try(PreparedStatement stm2 = conn.prepareStatement(sqlQuery);
