@@ -25,7 +25,7 @@
 					<li><a th:if="${session.isEmpty()}" th:href="@{/cadastro}" th:text="Cadastro"></a></li>
 					<li><a th:href="@{/informacoes}">Informações</a></li>
 					<li><a th:href="@{/mapa}">Mapa de emissão</a></li>
-					<li><a th:href="@{/login}">Login</a></li>
+					<li><a th:if="${session.isEmpty()}" th:href="@{/login}" th:text="Login"></a></li>
 					<li><a th:if="${!session.isEmpty()}" th:href="@{/logout}" th:text="Sair"></a></li>
 				</ul>
 			</div>

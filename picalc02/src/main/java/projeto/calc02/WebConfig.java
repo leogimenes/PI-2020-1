@@ -2,6 +2,7 @@ package projeto.calc02;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import projeto.calc02.interceptors.LoginInterceptor;
@@ -18,6 +19,11 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/cadastro", "/login", "/", "/index", "/fazerLogin", "/webjars/**", "/bootstrap/**");
-	} 
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/menu", "/cadastro", "/login", "/", "/index", "/fazerLogin", "/webjars/**", "/bootstrap/**");
+	}
+	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/minha_conta").setViewName("minha_conta");
+	}
 }

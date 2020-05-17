@@ -1,9 +1,8 @@
 package projeto.calc02.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -34,12 +32,9 @@ public class Usuario implements Serializable {
 	private String cepIndividual;
 	private String complementoIndividual;
 	
-	@OneToMany(mappedBy="idUsuario")
-	Set<Pegada> idPegada = new HashSet<Pegada>();
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="FK_idBairro")
-	private Bairro idBairro;
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, optional = false)
+	@JoinColumn
+	private Bairro bairro;
 	
 	public int getId() {
 		return id;
@@ -71,17 +66,17 @@ public class Usuario implements Serializable {
 	public void setComplementoIndividual(String complementoIndividual) {
 		this.complementoIndividual = complementoIndividual;
 	}
-	public Bairro getIdBairro() {
-		return idBairro;
+	public Bairro getBairro() {
+		return bairro;
 	}
-	public void setIdBairro(Bairro idBairro) {
-		this.idBairro = idBairro;
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idBairro == null) ? 0 : idBairro.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 	@Override
@@ -93,13 +88,12 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (idBairro == null) {
-			if (other.idBairro != null)
-				return false;
-		} else if (!idBairro.equals(other.idBairro))
+		if (id != other.id)
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

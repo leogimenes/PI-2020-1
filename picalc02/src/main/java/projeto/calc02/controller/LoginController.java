@@ -48,8 +48,10 @@ public class LoginController {
 	@PostMapping("/fazerLogin")
 	public String fazerLogin(HttpServletRequest request, Usuario usuario) {
 		if(loginService.logar(usuario)) {
+			usuario = loginService.updateId(usuario);
+			System.out.println(usuario.getId());
 			request.getSession().setAttribute("usuarioLogado", usuario);
-			return "/index";
+			return "redirect:minha_conta";
 		}
 		else {
 			return "/login";

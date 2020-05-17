@@ -12,7 +12,75 @@
 <body>
 	<div th:insert="Menu.html" /></div>
 	<br>
+	<div id="emissao" class="container">
+		<h3 class="page-header">Informações de emissão de CO2</h3>
+
+		<form class="form-inline" method="post" th:object="${pegada}"
+			th:action="@{/minha_conta}" style="margin: 5px 0">
+			<div class="row">
+				<div class="form-group col-md-1" style="margin: 5px 0">
+					<label for="tempCarro">Tempo de uso do carro</label> <input
+						type="number" class="form-control" th:field="*{tempCarro}"
+						required maxlength="2" placeholder="Tempo em horas" />
+				</div>
+
+				<div class="form-group col-md-1" style="margin: 5px 0">
+					<label for="tempBus">Tempo de uso de ônibus</label> <input
+						type="number" class="form-control" th:field="*{tempBus}" required
+						maxlength="2" placeholder="Tempo em horas" />
+				</div>
+
+				<div class="form-group col-md-1" style="margin: 5px 0">
+					<label for="volLixo">Volume de lixo</label> <input type="number"
+						class="form-control" th:field="*{volLixo}" required
+						maxlength="100" placeholder="Peso em kg" />
+				</div>
+			</div>
+
+			<div id="actions" class="row">
+				<div class="col-md-6" style="margin: 5px 5px">
+					<button type="submit" class="btn btn-primary" value="Incluir">Salvar</button>
+				</div>
+			</div>
+		</form>		
+	</div>
 	
+	<h3 class="page-header"></h3>
+		<div id="actions" class="row" style="margin: 5px 0">
+			<div th:if="${#session.getAttribute('btnParam') != 'exibir'}"
+				class="col-md-1">
+				<a class="btn btn-primary" th:href="@{/exibir?input=exibir}"
+					role="button">Exibir</a>
+			</div>
+			<div th:if="${#session.getAttribute('btnParam') == 'exibir'}"
+				class="col-md-1">
+				<a class="btn btn-primary" th:href="@{/exibir?input=null}"
+					role="button">Esconder</a>
+			</div>
+		</div>
+		<div th:if="${#session.getAttribute('btnParam') == 'exibir'}"
+			class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Tempo de carro</th>
+						<th>Tempo de ônibus</th>
+						<th>Volume de lixo</th>
+						<th>Pegada total</th>
+						<th>Data</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pegada : ${pegadas}">
+						<td th:text="${pegada.tempCarro}"></td>
+						<td th:text="${pegada.tempBus}"></td>
+						<td th:text="${pegada.volLixo}"></td>
+						<td th:text="${pegada.pegadaTotal}"></td>
+						<td th:text="${pegada.localDate}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	<script src="webjars/jquery/3.1.1/jquery.js"></script>
 	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>

@@ -3,6 +3,7 @@ package projeto.calc02.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +24,9 @@ public class Pegada implements Serializable {
 	private double pegadaTotal;
 	private LocalDate localDate;
 
-	@ManyToOne
-	@JoinColumn(name ="FK_idUsuario")
-	private Usuario idUsuario;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn
+	private Usuario usuario;
 	
 	public Pegada() {}
 
@@ -47,16 +48,6 @@ public class Pegada implements Serializable {
 
 	public void setLocalDate(LocalDate localDate) {
 		this.localDate = localDate;
-	}
-
-
-	public Usuario getIdUsuario() {
-		return idUsuario;
-	}
-
-
-	public void setIdUsuario(Usuario idUsuario) {
-		this.idUsuario = idUsuario;
 	}
 
 	public int getId() {
@@ -107,5 +98,48 @@ public class Pegada implements Serializable {
 	public void setPegadaTotal(double pegadaTotal) {
 		this.pegadaTotal = pegadaTotal;
 	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pegada other = (Pegada) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Pegada [id=" + id + ", tempCarro=" + tempCarro + ", tempBus=" + tempBus + ", volLixo=" + volLixo
+				+ ", pegadaTotal=" + pegadaTotal + ", localDate=" + localDate + ", usuario=" + usuario + "]";
+	}
+	
+	
 
 }

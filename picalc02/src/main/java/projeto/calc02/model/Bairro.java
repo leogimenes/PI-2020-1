@@ -23,7 +23,7 @@ public class Bairro implements Serializable{
 	private String regiao;
 	private Double volumeCo2;
 	
-	@OneToMany(mappedBy= "idBairro", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy= "bairro", cascade=CascadeType.ALL)
 	private List<Usuario> usuarios = new ArrayList<>();
 	
 	public int getId() {
@@ -53,12 +53,12 @@ public class Bairro implements Serializable{
 	
 	public void addUsuario(Usuario usuario) {
 		usuarios.add(usuario);
-		usuario.setIdBairro(null);
+		usuario.setBairro(null);
 	}
 	
 	public void removerComment(Usuario usuario) {
 		usuarios.remove(usuario);
-		usuario.setIdBairro(null);
+		usuario.setBairro(null);
 	}
 	@Override
 	public int hashCode() {

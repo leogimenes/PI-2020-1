@@ -14,4 +14,9 @@ public class LoginService {
 	public boolean logar(Usuario usuario) {
 		return usuarioRepo.findOneByNomeIndividualAndCpfIndividual(usuario.getNomeIndividual(), usuario.getCpfIndividual()) != null;
 	}
+	
+	public Usuario updateId(Usuario usuario) {
+		usuario = usuarioRepo.findOneByNomeIndividualAndCpfIndividual(usuario.getNomeIndividual(), usuario.getCpfIndividual());
+		return usuario;
+	}
 }
