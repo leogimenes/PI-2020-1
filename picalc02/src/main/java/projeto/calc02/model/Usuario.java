@@ -1,6 +1,8 @@
 package projeto.calc02.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,6 +38,9 @@ public class Usuario implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, optional = false)
 	@JoinColumn
 	private Bairro bairro;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<Pegada> pegada = new ArrayList<Pegada>();
 	
 	public int getId() {
 		return id;
@@ -71,7 +77,28 @@ public class Usuario implements Serializable {
 	}
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
+	}	
+	
+	public Collection<Pegada> getPegada() {
+		return new ArrayList<Pegada>(pegada);
 	}
+	
+	public void addPegada(Pegada pegada) {
+		
+		if(this.pegada.contains(pegada))
+			return ;
+		this.pegada.add(pegada);
+		pegada.setUsuario(this);
+	}
+	
+	public void removePegada(Pegada newPegada) {
+		
+		if(!pegada.contains(newPegada))
+			return ;
+		pegada.remove(newPegada);
+		newPegada.setUsuario(null);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

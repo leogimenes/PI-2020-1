@@ -24,20 +24,23 @@ public class Pegada implements Serializable {
 	private double pegadaTotal;
 	private LocalDate localDate;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn
 	private Usuario usuario;
 	
-	public Pegada() {}
+	public Pegada() {
+		setLocalDate(LocalDate.now());
+	}
 
 
 	public Pegada(String nomeIndividual, String cpfIndividual, int tempCarro, int tempBus, int volLixo,
-			double pegadaTotal, String cepIndividual, String complementoIndividual, int idBairro) {
+			double pegadaTotal, String cepIndividual, String complementoIndividual, int idBairro, LocalDate localDate) {
 		super();
 		this.tempCarro = tempCarro;
 		this.tempBus = tempBus;
 		this.volLixo = volLixo;
 		this.pegadaTotal = pegadaTotal;
+		this.localDate = localDate;
 	}
 
 
@@ -66,6 +69,7 @@ public class Pegada implements Serializable {
 
 
 	public void setTempCarro(int tempCarro) {
+		setPegadaTotal(tempCarro);
 		this.tempCarro = tempCarro;
 	}
 
@@ -76,6 +80,7 @@ public class Pegada implements Serializable {
 
 
 	public void setTempBus(int tempBus) {
+		setPegadaTotal(tempBus);
 		this.tempBus = tempBus;
 	}
 
@@ -86,6 +91,7 @@ public class Pegada implements Serializable {
 
 
 	public void setVolLixo(int volLixo) {
+		setPegadaTotal(volLixo);
 		this.volLixo = volLixo;
 	}
 
@@ -96,7 +102,7 @@ public class Pegada implements Serializable {
 
 
 	public void setPegadaTotal(double pegadaTotal) {
-		this.pegadaTotal = pegadaTotal;
+		this.pegadaTotal = this.pegadaTotal + pegadaTotal;
 	}
 
 
@@ -104,10 +110,29 @@ public class Pegada implements Serializable {
 		return usuario;
 	}
 
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	/*
+	public void setUsuario(Usuario usuario) {
+		
+		if(sameAsFormer(this.usuario))
+			return ;
+		
+		Usuario oldUsuario = this.usuario;
+		this.usuario = usuario;
+		
+		if(oldUsuario != null) 
+			usuario.removePegada(this);		
+			
+		if(usuario != null)
+			usuario.addPegada(this);
+	}
+	
+	private boolean sameAsFormer(Usuario usuario) {
+		return this.usuario == null ? usuario == null : this.usuario.equals(usuario); 
+	}*/
 
 
 	@Override

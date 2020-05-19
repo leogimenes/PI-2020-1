@@ -1,4 +1,4 @@
-package projeto.calc02;
+package projeto.calc02.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

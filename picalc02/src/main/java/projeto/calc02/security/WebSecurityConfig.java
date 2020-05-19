@@ -1,3 +1,4 @@
+package projeto.calc02.security;
 /*package projeto.calc02;
 
 import org.springframework.context.annotation.Bean;

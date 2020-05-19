@@ -41,7 +41,9 @@ public class PegadaController {
 	
 	@PostMapping("/minha_conta")
 	public String listar_pegada(HttpServletRequest request, Pegada pegada) {
-		pegadaService.salvar(pegada);		
+		Usuario u = (Usuario) request.getSession().getAttribute("usuarioLogado");
+		pegada.setUsuario(u);
+		pegadaService.salvar(pegada);
 		return "redirect:/minha_conta";		
 	}
 	

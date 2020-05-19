@@ -21,13 +21,13 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a th:if="${!session.isEmpty()}" th:href="@{/minha_conta}">Minha conta</a></li>
-					<li><a th:if="${session.isEmpty()}" th:href="@{/cadastro}" th:text="Cadastro"></a></li>
-					<li><a th:href="@{/informacoes}">Informações</a></li>
+					<li class="nav-item"><a th:if="${!session.isEmpty()}" th:href="@{/minha_conta}">Minha conta</a></li>
+					<li class="nav-item"><a th:if="${session.isEmpty()}" th:href="@{/cadastro}" th:text="Cadastro"></a></li>
+					<li class="nav-item"><a th:href="@{/informacoes}">Informações</a></li>
 					<li><a th:href="@{/mapa}">Mapa de emissão</a></li>
-					<li><a th:if="${session.isEmpty()}" th:href="@{/login}" th:text="Login"></a></li>
-					<li><a th:if="${!session.isEmpty()}" th:href="@{/logout}" th:text="Sair"></a></li>
 				</ul>
+				<a class="btn btn-danger navbar-btn" th:if="${session.isEmpty()}" th:href="@{/login}" ><span class="glyphicon glyphicon-log-in"></span> Login</a>
+				<a class="btn btn-danger navbar-btn" th:if="${!session.isEmpty()}" th:href="@{/logout}" >Sair</a>
 			</div>
 		</div>
 	</nav>

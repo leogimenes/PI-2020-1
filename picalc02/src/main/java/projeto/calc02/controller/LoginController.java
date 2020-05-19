@@ -49,7 +49,6 @@ public class LoginController {
 	public String fazerLogin(HttpServletRequest request, Usuario usuario) {
 		if(loginService.logar(usuario)) {
 			usuario = loginService.updateId(usuario);
-			System.out.println(usuario.getId());
 			request.getSession().setAttribute("usuarioLogado", usuario);
 			return "redirect:minha_conta";
 		}
