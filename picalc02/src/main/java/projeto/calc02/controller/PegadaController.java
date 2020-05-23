@@ -53,5 +53,12 @@ public class PegadaController {
 		mv.addObject(new Pegada());
 		model.addAttribute("btnParam", input);			
 		return "redirect:/minha_conta";
-	}	
+	}
+	
+	@GetMapping("/mapa")
+	public ModelAndView mapaDeEmissao(ModelAndView mv) {
+		mv = new ModelAndView("mapa");
+		
+		return mv;
+	}
 }

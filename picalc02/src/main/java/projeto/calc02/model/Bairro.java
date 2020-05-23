@@ -23,7 +23,7 @@ public class Bairro implements Serializable{
 	private String regiao;
 	private Double volumeCo2;
 	
-	@OneToMany(mappedBy= "bairro", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy= "bairro", cascade=CascadeType.MERGE)
 	private List<Usuario> usuarios = new ArrayList<>();
 	
 	public int getId() {

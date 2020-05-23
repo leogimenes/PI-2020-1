@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
 	private String cepIndividual;
 	private String complementoIndividual;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE, optional = false)
 	@JoinColumn
 	private Bairro bairro;
 	
