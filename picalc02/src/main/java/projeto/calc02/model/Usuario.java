@@ -1,18 +1,14 @@
 package projeto.calc02.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -29,23 +25,20 @@ public class Usuario implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	private String nomeIndividual;
 	private String cpfIndividual;
 	private String cepIndividual;
 	private String complementoIndividual;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE, optional = false)
+	@ManyToOne(cascade=CascadeType.MERGE, optional = false)
 	@JoinColumn
 	private Bairro bairro;
 	
-	@OneToMany(mappedBy = "usuario")
-	private Collection<Pegada> pegada = new ArrayList<Pegada>();
-	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNomeIndividual() {
@@ -79,31 +72,26 @@ public class Usuario implements Serializable {
 		this.bairro = bairro;
 	}	
 	
-	public Collection<Pegada> getPegada() {
-		return new ArrayList<Pegada>(pegada);
-	}
-	
-	public void addPegada(Pegada pegada) {
-		
-		if(this.pegada.contains(pegada))
-			return ;
-		this.pegada.add(pegada);
-		pegada.setUsuario(this);
-	}
-	
-	public void removePegada(Pegada newPegada) {
-		
-		if(!pegada.contains(newPegada))
-			return ;
-		pegada.remove(newPegada);
-		newPegada.setUsuario(null);
-	}
+	/*
+	 * public Collection<Pegada> getPegada() { return new ArrayList<Pegada>(pegada);
+	 * }
+	 * 
+	 * public void addPegada(Pegada pegada) {
+	 * 
+	 * if(this.pegada.contains(pegada)) return ; this.pegada.add(pegada);
+	 * pegada.setUsuario(this); }
+	 * 
+	 * public void removePegada(Pegada newPegada) {
+	 * 
+	 * if(!pegada.contains(newPegada)) return ; pegada.remove(newPegada);
+	 * newPegada.setUsuario(null); }
+	 */
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -115,13 +103,18 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nomeIndividual=" + nomeIndividual + ", cpfIndividual=" + cpfIndividual
+				+ ", cepIndividual=" + cepIndividual + ", complementoIndividual=" + complementoIndividual + ", bairro="
+				+ bairro + "]";
+	}	
 	
 }

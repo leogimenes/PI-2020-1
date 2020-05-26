@@ -14,76 +14,84 @@
 	<br>
 	<div id="emissao" class="container">
 		<h3 class="page-header">Informações de emissão de CO2</h3>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<form method="post" th:object="${pegada}"
+					th:action="@{/minha_conta}">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="distanciaCarro">Distancia de uso do carro</label><input id="distanciaCarro"
+								type="number" class="form-control" th:field="*{distanciaCarro}"
+								required maxlength="2" placeholder="Distância em km" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group  col-md-12">
+							<label for="distanciaBus">Distancia de uso de ônibus</label><input id="distanciaBus"
+								type="number" class="form-control" th:field="*{distanciaBus}"
+								required maxlength="2" placeholder="Distância em km" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group  col-md-12">
+							<label for="volLixo">Peso de lixo (Dia)</label><br> <input id="volLixo" type="number"
+								class="form-control" th:field="*{volLixo}" required
+								maxlength="100" placeholder="Peso em kg" />
+						</div>
+					</div>
 
-		<form class="form-inline" method="post" th:object="${pegada}"
-			th:action="@{/minha_conta}" style="margin: 5px 0">
-			<div class="row">
-				<div class="form-group col-md-12" style="margin: 5px 0">
-					<label for="tempCarro">Tempo de uso do carro</label> <input
-						type="number" class="form-control" th:field="*{tempCarro}"
-						required maxlength="2" placeholder="Tempo em horas" />
+					<div class="row">
+						<div class="col-md-12" style="padding-top: 5px">
+							<button type="submit" class="btn btn-primary"
+								 role="button">Salvar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<div class="row">
+					<div th:if="${#session.getAttribute('btnParam') == 'exibir'}"
+						class="panel-body">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Kg CO₂ gerada por carro</th>
+									<th>Kg CO₂ gerada por ônibus</th>
+									<th>Volume de CO₂ por lixo</th>
+									<th>Pegada total (Kg CO₂)</th>
+									<th>Data</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="pegada : ${pegadas}">
+									<td th:text="${pegada.distanciaCarro}"></td>
+									<td th:text="${pegada.distanciaBus}"></td>
+									<td th:text="${pegada.volLixo}"></td>
+									<td th:text="${pegada.pegadaTotal}"></td>
+									<td
+										th:text="${pegada.getLocalDate().getDayOfMonth() + '/' + pegada.getLocalDate().getMonthValue() + '/' + pegada.getLocalDate().getYear()}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="actions2" class="row" style="padding-top: 5px">
+					<div class="col-md-12"
+						th:if="${#session.getAttribute('btnParam') != 'exibir'}">
+						<a class="btn btn-primary" th:href="@{/exibir?input=exibir}"
+							role="button">Exibir</a>
+					</div>
+					<div class="col-md-12"
+						th:if="${#session.getAttribute('btnParam') == 'exibir'}">
+						<a class="btn btn-primary" th:href="@{/exibir?input=null}"
+							role="button">Esconder</a>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group col-md-12" style="margin: 5px 0">
-					<label for="tempBus">Tempo de uso de ônibus</label> <input
-						type="number" class="form-control" th:field="*{tempBus}" required
-						maxlength="2" placeholder="Tempo em horas" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-12" style="margin: 5px 0">
-					<label for="volLixo">Volume de lixo</label>
-					 <input type="number"
-						class="form-control" th:field="*{volLixo}" required
-						maxlength="100" placeholder="Peso em kg" />
-				</div>
-			</div>
-
-			<div id="actions" class="row">
-				<div class="col-md-12" style="margin: 5px 5px">
-					<button type="submit" class="btn btn-primary" value="Incluir">Salvar</button>
-				</div>
-			</div>
-		</form>
-	</div>
-
-	<h3 class="page-header"></h3>
-	<div id="actions" class="row" style="margin: 5px 0">
-		<div th:if="${#session.getAttribute('btnParam') != 'exibir'}"
-			class="col-md-1">
-			<a class="btn btn-primary" th:href="@{/exibir?input=exibir}"
-				role="button">Exibir</a>
 		</div>
-		<div th:if="${#session.getAttribute('btnParam') == 'exibir'}"
-			class="col-md-1">
-			<a class="btn btn-primary" th:href="@{/exibir?input=null}"
-				role="button">Esconder</a>
-		</div>
 	</div>
-	<div th:if="${#session.getAttribute('btnParam') == 'exibir'}"
-		class="panel-body">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Tempo de carro</th>
-					<th>Tempo de ônibus</th>
-					<th>Volume de lixo</th>
-					<th>Pegada total</th>
-					<th>Data</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="pegada : ${pegadas}">
-					<td th:text="${pegada.tempCarro}"></td>
-					<td th:text="${pegada.tempBus}"></td>
-					<td th:text="${pegada.volLixo}"></td>
-					<td th:text="${pegada.pegadaTotal}"></td>
-					<td th:text="${pegada.localDate}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+
+
 	<script src="webjars/jquery/3.1.1/jquery.js"></script>
 	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>

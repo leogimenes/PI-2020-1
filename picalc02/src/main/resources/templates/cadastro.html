@@ -17,46 +17,43 @@
 		<form class="form-inline" method="post" th:object="${usuario}"
 			th:action="@{/cadastro}" style="margin: 20px 10px">
 			<div class="row">
-				<div class="form-group col-md-6" style="margin: 5px 5px">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6"
+					style="margin: 5px 5px">
 					<label for="nomeIndividual">Nome</label> <input type="text"
 						class="form-control" th:field="*{nomeIndividual}" required
 						maxlength="100" placeholder="Nome completo" />
 				</div>
 			</div>
-
 			<div class="row">
-				<div class="form-group col-md-6" style="margin: 5px 5px">
-					<label for="CPF_Individial">CPF</label> <input type="text"
-						class="form-control" th:field="*{cpfIndividual}" required
-						maxlength="14"
-						pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})"
-						placeholder="123.456.789-xx">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6"
+					style="margin: 5px 5px">
+					<label for="cpf">CPF</label> <input id="cpf" value="" maxlength="11" required type="text" class="form-control" placeholder="CPF"
+						th:field="*{cpfIndividual}">
 				</div>
 			</div>
-
 			<div class="row">
-				<div class="form-group col-md-6" style="margin: 5px 5px">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6"
+					style="margin: 5px 5px">
 					<label for="CEP">CEP</label> <input type="text"
 						class="form-control" th:field="*{cepIndividual}" required
 						maxlength="9" placeholder="CEP">
 				</div>
+				<div class="form-group col-sm-6 col-md-6 col-lg-6"
+					style="margin: 5px 5px">
+					<label for="bairro">Bairro</label> <select id="bairro"
+						class="form-control" th:field="*{bairro.id}">
+						<option value="0">Selecione o bairro</option>
+						<option th:each="bairro : ${bairros}" th:value="${bairro.id}"
+							th:text="${bairro.nomeBairro}"></option>
+					</select>
+				</div>
 			</div>
-			
 			<div class="row">
-				<div class="form-group col-md-6" style="margin: 5px 5px">
+				<div class="form-group col-sm-6 col-md-6 col-lg-6"
+					style="margin: 5px 5px">
 					<label for="Complemento">Complemento</label> <input type="text"
 						class="form-control" th:field="*{complementoIndividual}" required
 						maxlength="100">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-md-6" style="margin: 5px 5px">
-				<label for="bairro">Bairro</label>
-					<select id="bairro" class="form-control" th:field="*{bairro.id}">
-						<option value="0">Selecione o bairro</option>
-						<option th:each="bairro : ${bairros}" th:value="${bairro.id}" th:text="${bairro.nomeBairro}"></option>
-					</select>
 				</div>
 			</div>
 
@@ -71,5 +68,13 @@
 	</div>
 	<script src="webjars/jquery/3.1.1/jquery.js"></script>
 	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	const cpf = document.querySelector("#cpf");
+	cpf.addEventListener("blur", () => {
+		  let value = cpf.value.replace(/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/, "$1.$2.$3-$4");
+		  
+		  cpf.value = value;
+		});
+	</script>
 </body>
 </html>
