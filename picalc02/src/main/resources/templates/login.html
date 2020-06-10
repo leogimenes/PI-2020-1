@@ -7,12 +7,12 @@
 <title>Login</title>
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
+<link th:href="@{/assets/css/default.css}" rel="stylesheet" />
 </head>
 
 <body>
 	<div th:insert="Menu.html" /></div>
-	<br>
-	<br>
+	<div class="row" style="height: 50px; width: 100%"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 ">
@@ -38,16 +38,20 @@
 						</div>
 					</div>
 					<div th:if="${param.error}">Usuário ou senha inválidos.</div>
-					<div th:if="${param.logout}">Você foi deslogado</div>
+					<div th:if="${param.logout}">
+						<div class="row" style="height: 50px; width: 100%"></div>
+						<h1>Você foi deslogado</h1>					
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	<div class="row" style="height: 50px; width: 100%"></div>
 	<script src="webjars/jquery/3.1.1/jquery.js"></script>
 	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	const cpf = document.querySelector("#cpf");
-	cpf.addEventListener("blur", () => {
+		const cpf = document.querySelector("#cpf");
+		cpf.addEventListener("blur", () => {
 		  let value = cpf.value.replace(/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/, "$1.$2.$3-$4");
 		  
 		  cpf.value = value;

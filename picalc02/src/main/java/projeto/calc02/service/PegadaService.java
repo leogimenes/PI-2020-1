@@ -33,16 +33,28 @@ public class PegadaService {
 		return pegadaRepo.somaUsuarioPegadas(usuario);
 	}
 	
-	public Double somarTodosPorBairro(Bairro bairro) {
-		String s = "" + pegadaRepo.somaBairroPegadas(bairro);
-		if(s.equals("null")) {
-			return 0.0;
-		}
-		return Double.parseDouble(s);
+	public Pegada somarTodosPorBairro(Bairro bairro) {
+		Double carros = verificaNulos("" + pegadaRepo.somaBairroCarros(bairro));
+		Double bus = verificaNulos("" + pegadaRepo.somaBairroBus(bairro));
+		Double lixo = verificaNulos("" + pegadaRepo.somaBairroLixo(bairro));
+		Double pegadaT = verificaNulos("" + pegadaRepo.somaBairroPegadas(bairro));
+		Pegada pegada = new Pegada(carros, bus, lixo, pegadaT);
+		return pegada;
 	}
 	
 	public Double somarTodosPorBairroId(Long bairro) {
 		
 		return pegadaRepo.somaBairroPegadas(bairro);
+	}
+	
+	public List<Pegada> getSomaPegadasPorBairro() {
+		return pegadaRepo.sumPegadasByBairroId();
+	}
+	
+	private Double verificaNulos(String s) {
+		if(s.equals("null")) {
+			return 0.0;
+		}
+		return Double.parseDouble(s);
 	}
 }

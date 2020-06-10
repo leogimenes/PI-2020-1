@@ -7,43 +7,59 @@
 <title>Minha conta</title>
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
+<link th:href="@{/assets/css/default.css}" rel="stylesheet" />
+<script src="webjars/jquery/3.1.1/jquery.js"></script>
+<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<div th:insert="Menu.html" /></div>
-	<br>
+	<div class="row" style="height: 50px; width: 100%"></div>
 	<div id="emissao" class="container">
 		<h3 class="page-header">Informações de emissão de CO2</h3>
+		<div class="row"></div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				<form method="post" th:object="${pegada}"
 					th:action="@{/minha_conta}">
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label for="distanciaCarro">Distancia de uso do carro</label><input id="distanciaCarro"
-								type="number" class="form-control" th:field="*{distanciaCarro}"
-								required maxlength="2" placeholder="Distância em km" />
+							<p>
+								Na <strong>distância percorrida de carro</strong> insira a
+								distância, em quilômetros, percorrida por você em carro próprio,
+								táxi ou veículo de aplicativo de transporte no período de 1 dia.
+							</p>
+							<label for="distanciaCarro">Distancia percorrida de carro</label>
+							<input id="distanciaCarro" type="number" step="0.001" class="form-control"
+								th:field="*{distanciaCarro}" maxlength="2"
+								placeholder="Distância em km" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group  col-md-12">
-							<label for="distanciaBus">Distancia de uso de ônibus</label><input id="distanciaBus"
-								type="number" class="form-control" th:field="*{distanciaBus}"
-								required maxlength="2" placeholder="Distância em km" />
+							<p>
+								Na <strong>distância percorrida de ônibus</strong> insira a
+								distância, em quilômetros, percorrida por você em ônibus
+								metropolitano ou rodoviário.
+							</p>
+							<label for="distanciaBus">Distancia percorrida de ônibus</label><input
+								id="distanciaBus" type="number" step="0.001" class="form-control"
+								th:field="*{distanciaBus}" maxlength="2"
+								placeholder="Distância em km" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group  col-md-12">
-							<label for="volLixo">Peso de lixo (Dia)</label><br> <input id="volLixo" type="number"
-								class="form-control" th:field="*{volLixo}" required
-								maxlength="100" placeholder="Peso em kg" />
+							<p>No <strong>peso de lixo</strong> insira o peso, em quilogramas, do lixo gerado por você. </p>
+							<label for="volLixo">Peso de lixo (Dia)</label><br> <input
+								id="volLixo" type="number" step="0.001" class="form-control"
+								th:field="*{pesoLixo}" maxlength="100" placeholder="Peso em kg" />
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-12" style="padding-top: 5px">
-							<button type="submit" class="btn btn-primary"
-								 role="button">Salvar</button>
+							<button type="submit" class="btn btn-primary" role="button">Salvar</button>
 						</div>
 					</div>
 				</form>
@@ -52,34 +68,41 @@
 				<div class="row">
 					<div th:if="${#session.getAttribute('btnParam') == 'exibir'}"
 						class="panel-body">
-						<table class="table table-bordered table-striped">
+						<table class="table table-bordered table-striped"
+							style="width: inherit; background-color: #fff">
 							<thead>
 								<tr>
-									<th>Kg CO₂ gerada por carro</th>
-									<th>Kg CO₂ gerada por ônibus</th>
-									<th>Volume de CO₂ por lixo</th>
+									<th>Kg CO₂ emitido por uso de carro</th>
+									<th>Kg CO₂ emitido por uso de ônibus</th>
+									<th>Volume de CO₂ emitido por lixo</th>
 									<th>Pegada total (Kg CO₂)</th>
-									<th>Data</th>
+									<th>Data de inserção da informação</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="pegada : ${pegadas}">
-									<td th:text="${pegada.distanciaCarro}"></td>
-									<td th:text="${pegada.distanciaBus}"></td>
-									<td th:text="${pegada.volLixo}"></td>
-									<td th:text="${pegada.pegadaTotal}"></td>
-									<td
-										th:text="${pegada.getLocalDate().getDayOfMonth() + '/' + pegada.getLocalDate().getMonthValue() + '/' + pegada.getLocalDate().getYear()}"></td>
-								</tr>
+								<th:block th:each="pegada,iter : ${pegadas}">
+									<tr>
+										<td th:text="${pegada.distanciaCarro}"></td>
+										<td th:text="${pegada.distanciaBus}"></td>
+										<td th:text="${pegada.pesoLixo}"></td>
+										<td th:text="${pegada.pegadaTotal}"></td>
+										<td
+											th:text="${pegada.localDate.getDayOfMonth() + '/' + pegada.localDate.getMonthValue() + '/' + pegada.localDate.getYear()}"></td>
+									</tr>
+								</th:block>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div id="actions2" class="row" style="padding-top: 5px">
+					<div class="col-md-12">
+						<label for="minhas_informacoes">Minhas informações de
+							emissão</label>
+					</div>
 					<div class="col-md-12"
 						th:if="${#session.getAttribute('btnParam') != 'exibir'}">
-						<a class="btn btn-primary" th:href="@{/exibir?input=exibir}"
-							role="button">Exibir</a>
+						<a id="minhas_informacoes" class="btn btn-primary"
+							th:href="@{/exibir?input=exibir}" role="button">Exibir</a>
 					</div>
 					<div class="col-md-12"
 						th:if="${#session.getAttribute('btnParam') == 'exibir'}">
@@ -89,9 +112,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="row" style="height: 50px; width: 100%"></div>
 	</div>
-
-
-	<script src="webjars/jquery/3.1.1/jquery.js"></script>
-	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
+</html>

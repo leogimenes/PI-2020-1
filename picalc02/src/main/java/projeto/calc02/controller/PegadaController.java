@@ -37,9 +37,7 @@ public class PegadaController {
 
 		Usuario u = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		List<Pegada> pegadas = pegadaService.getPegadas(u.getId());
-
 		mv.addObject("pegadas", pegadas);
-
 		return mv;
 	}
 
@@ -47,6 +45,7 @@ public class PegadaController {
 	public String listar_pegada(HttpServletRequest request, Pegada pegada) {
 		Usuario u = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		pegada.setUsuario(u);
+		pegada.setPegadaTotal((pegada.getDistanciaCarro()) + pegada.getDistanciaBus() + pegada.getPesoLixo());
 		pegada.setBairro(u.getBairro());
 		pegadaService.salvar(pegada);
 		return "redirect:/minha_conta";
@@ -69,10 +68,14 @@ public class PegadaController {
 		mv = new ModelAndView("mapa");
 		mv.addObject("pegada", new Pegada());
 		mv.addObject("inputBairro", inputBairro);
+		
+		List<Pegada> pegadas = pegadaService.getSomaPegadasPorBairro();
+		mv.addObject("pegadas", pegadas);
+		
 		if (!inputBairro.isBlank()) {
 			Pegada pegada = new Pegada();
 			Bairro bairro = bairrosService.getBairro(inputBairro);
-			pegada.setPegadaTotal(pegadaService.somarTodosPorBairro(bairro));
+			pegada = pegadaService.somarTodosPorBairro(bairro);
 			mv.addObject("pegada", pegada);
 		}
 		

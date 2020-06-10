@@ -7,41 +7,52 @@
 <title>Cadastro de pegada de carbono</title>
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
+<link th:href="@{/assets/css/default.css}" rel="stylesheet" />
 </head>
 <body>
 
 	<div th:insert="Menu.html" /></div>
+	<div class="row" style="height: 50px; width: 100%"></div>
 	<div id="main" class="container">
 		<h3 class="page-header">Cadastro de Pegada de Carbono</h3>
 
-		<form class="form-inline" method="post" th:object="${usuario}"
-			th:action="@{/cadastro}" style="margin: 20px 10px">
+		<form method="post" th:object="${usuario}"
+			th:action="@{/cadastro}" >
 			<div class="row">
-				<div class="form-group col-sm-6 col-md-6 col-lg-6"
-					style="margin: 5px 5px">
-					<label for="nomeIndividual">Nome</label> <input type="text"
-						class="form-control" th:field="*{nomeIndividual}" required
-						maxlength="100" placeholder="Nome completo" />
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<label for="nomeIndividual">Nome</label>
+				</div>
+				<div class="form-group col-xs-9 col-sm-9 col-md-9 col-lg-9">
+					<input type="text" class="form-control"
+						th:field="*{nomeIndividual}" required maxlength="100"
+						placeholder="Nome completo" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6 col-md-6 col-lg-6"
-					style="margin: 5px 5px">
-					<label for="cpf">CPF</label> <input id="cpf" value="" maxlength="11" required type="text" class="form-control" placeholder="CPF"
-						th:field="*{cpfIndividual}">
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<label for="cpf">CPF</label>
+				</div>
+				<div class="form-group col-xs-9 col-sm-9 col-md-9 col-lg-9">
+					<input id="cpf" value="" maxlength="11" required type="text"
+						class="form-control" placeholder="CPF" th:field="*{cpfIndividual}">
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6 col-md-6 col-lg-6"
-					style="margin: 5px 5px">
-					<label for="CEP">CEP</label> <input type="text"
-						class="form-control" th:field="*{cepIndividual}" required
-						maxlength="9" placeholder="CEP">
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<label for="CEP">CEP</label>
 				</div>
-				<div class="form-group col-sm-6 col-md-6 col-lg-6"
-					style="margin: 5px 5px">
-					<label for="bairro">Bairro</label> <select id="bairro"
-						class="form-control" th:field="*{bairro.id}">
+				<div class="form-group col-xs-9 col-sm-9 col-md-9 col-lg-9">
+					<input type="text" class="form-control" th:field="*{cepIndividual}"
+						required maxlength="9" placeholder="CEP">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<label for="bairro">Bairro</label>
+				</div>
+
+				<div class="form-group col-xs-9 col-sm-9 col-md-9 col-lg-9">
+					<select id="bairro" class="form-control" th:field="*{bairro.id}" required>
 						<option value="0">Selecione o bairro</option>
 						<option th:each="bairro : ${bairros}" th:value="${bairro.id}"
 							th:text="${bairro.nomeBairro}"></option>
@@ -49,23 +60,28 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6 col-md-6 col-lg-6"
-					style="margin: 5px 5px">
-					<label for="Complemento">Complemento</label> <input type="text"
-						class="form-control" th:field="*{complementoIndividual}" required
-						maxlength="100">
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<label for="Complemento">Complemento</label>
+				</div>
+
+				<div class="form-group col-xs-9 col-sm-9 col-md-9 col-lg-9">
+					<input type="text" class="form-control"
+						th:field="*{complementoIndividual}" required maxlength="100">
 				</div>
 			</div>
 
 			<div id="actions" class="row">
-				<div class="col-md-6" style="margin: 5px 5px">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<button type="submit" class="btn btn-primary" name="acao"
 						value="Incluir">Salvar</button>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<a th:href="@{/index}" class="btn btn-default">Cancelar</a>
 				</div>
 			</div>
 		</form>
 	</div>
+	<div class="row" style="height: 50px; width: 100%"></div>
 	<script src="webjars/jquery/3.1.1/jquery.js"></script>
 	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">

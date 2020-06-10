@@ -1,6 +1,8 @@
 package projeto.calc02.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Pegada implements Serializable {
@@ -23,32 +26,41 @@ public class Pegada implements Serializable {
 	@Column(columnDefinition = "double default 0")
 	private Double distanciaBus = 0.0;
 	@Column(columnDefinition = "double default 0")
-	private Double volLixo = 0.0;
+	private Double pesoLixo = 0.0;
 	@Column(columnDefinition = "double default 0")
 	private Double pegadaTotal = 0.0;
+	@Transient
 	private LocalDate localDate;
 
 	@ManyToOne(cascade=CascadeType.MERGE, optional = false)
 	private Usuario usuario;
-	
+
 	@ManyToOne(cascade=CascadeType.MERGE, optional = false)
 	private Bairro bairro;
-	
+
 	public Pegada() {
 		setLocalDate(LocalDate.now());
 	}
 
+	
 
-	public Pegada(String nomeIndividual, String cpfIndividual, Double distanciaCarro, Double distanciaBus, Double volLixo,
-			Double pegadaTotal, String cepIndividual, String complementoIndividual, Long idBairro, LocalDate localDate) {
-		super();
+	public Pegada(Double distanciaCarro, Double distanciaBus, Double pesoLixo, Double pegadaTotal) {
+		setLocalDate(LocalDate.now());
 		this.distanciaCarro = distanciaCarro;
 		this.distanciaBus = distanciaBus;
-		this.volLixo = volLixo;
+		this.pesoLixo = pesoLixo;
 		this.pegadaTotal = pegadaTotal;
-		this.localDate = localDate;
 	}
 
+
+
+	private static double round(double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+
+		BigDecimal bd = new BigDecimal(Double.toString(value));
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
+	}
 
 	public LocalDate getLocalDate() {
 		return localDate;
@@ -70,39 +82,40 @@ public class Pegada implements Serializable {
 
 
 	public Double getDistanciaCarro() {
+		distanciaCarro = round(distanciaCarro, 1);
 		return distanciaCarro;
 	}
 
 
 	public void setDistanciaCarro(Double distanciaCarro) {
-		setPegadaTotal(distanciaCarro*0.15);
-		this.distanciaCarro = distanciaCarro*0.15;
+		this.distanciaCarro = distanciaCarro*0.473;
 	}
 
 
 	public Double getDistanciaBus() {
+		distanciaBus = round(distanciaBus, 1);
 		return distanciaBus;
 	}
 
 
 	public void setDistanciaBus(Double distanciaBus) {
-		setPegadaTotal(distanciaBus*0.186);
-		this.distanciaBus = distanciaBus*0.186;
+		this.distanciaBus = distanciaBus*0.458;
 	}
 
 
-	public Double getVolLixo() {
-		return volLixo;
+	public Double getPesoLixo() {
+		pesoLixo = round(pesoLixo, 1);
+		return pesoLixo;
 	}
 
 
-	public void setVolLixo(Double volLixo) {
-		setPegadaTotal(volLixo*2.64);
-		this.volLixo = volLixo*2.64;
+	public void setPesoLixo(Double pesoLixo) {
+		this.pesoLixo = pesoLixo*2.64;
 	}
 
 
 	public Double getPegadaTotal() {
+		pegadaTotal = round(pegadaTotal, 1);
 		return pegadaTotal;
 	}
 
@@ -119,7 +132,7 @@ public class Pegada implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public Bairro getBairro() {
 		return bairro;
 	}
@@ -159,10 +172,10 @@ public class Pegada implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pegada [id=" + id + ", tempCarro=" + distanciaCarro + ", tempBus=" + distanciaBus + ", volLixo=" + volLixo
+		return "Pegada [id=" + id + ", tempCarro=" + distanciaCarro + ", tempBus=" + distanciaBus + ", pesoLixo=" + pesoLixo
 				+ ", pegadaTotal=" + pegadaTotal + ", localDate=" + localDate + "]";
 	}
-	
-	
+
+
 
 }

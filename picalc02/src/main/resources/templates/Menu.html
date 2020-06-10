@@ -4,6 +4,42 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
+<style>
+.dropdown-item-a{
+	color: #9d9d9d;
+}
+.dropdown-item-a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+</style>
+
 <title>Menu</title>
 </head>
 <div style="margin: 20px 10px">
@@ -21,15 +57,39 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-item"><a th:if="${!session.isEmpty()}" th:href="@{/minha_conta}">Minha conta</a></li>
-					<li class="nav-item"><a th:if="${session.isEmpty()}" th:href="@{/cadastro}" th:text="Cadastro"></a></li>
-					<li class="nav-item"><a th:href="@{/informacoes}">Informações</a></li>
-					<li><a th:href="@{/mapa}">Mapa de emissão</a></li>
+					<li class="nav-item dropdown" th:if="${!session.isEmpty()}"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"
+						th:text="'Olá, ' + ${session.usuarioLogado.nomeIndividual}"></a>
+						<div class="dropdown-menu" style="background-color: #222"
+							aria-labelledby="navbarDropdown">
+							<ul >
+								<li class="dropdown-item ">
+									<a class="dropdown-item-a" th:if="${!session.isEmpty()}"
+										th:href="@{/minha_conta}">Minha conta</a>
+								</li>
+								<li class="dropdown-item">
+									<a class="btn btn-danger navbar-btn"
+										th:href="@{/logout}">Sair</a>
+								</li>
+
+							</ul>
+						</div></li>
+					<li class="nav-item"><a th:if="${session.isEmpty()}"
+						th:href="@{/cadastro}" th:text="Cadastro"></a></li>
+					<!-- <li class="nav-item"><a th:href="@{/informacoes}">Informações</a></li> -->
+					<li class="nav-item"><a th:href="@{/mapa}">Mapa de emissão</a></li>
+
+
 				</ul>
-				<a class="btn btn-danger navbar-btn" th:if="${session.isEmpty()}" th:href="@{/login}" ><span class="glyphicon glyphicon-log-in"></span> Login</a>
-				<a class="btn btn-danger navbar-btn" th:if="${!session.isEmpty()}" th:href="@{/logout}" >Sair</a>
+				<a class="btn btn-danger navbar-btn" th:if="${session.isEmpty()}"
+					th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>
+					Login</a>
 			</div>
 		</div>
 	</nav>
+
 </div>
+
 </html>

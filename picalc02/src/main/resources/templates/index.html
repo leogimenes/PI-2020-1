@@ -7,11 +7,41 @@
 <title>Menu</title>
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
+<link th:href="@{/assets/css/default.css}" rel="stylesheet" />
 
 </head>
 
 <body>
 	<div th:insert="Menu.html" /></div>
+	<div class="row" style="height: 50px; width: 100%"></div>
+	<div id="main" class="container">
+		<h1>Calc02</h1>
+		<h3>
+			<u>Pegada de Carbono</u>
+		</h3>
+
+		<p>"CalCO2 é um projeto criado no intuito de calcular e mensurar
+			as emissões de carbono na cidade de são paulo, <br>usando os dados do
+			público para mapeá-los e projeta-los no mapa responsivo, <br>seguindo o
+			ensinamento tirado da Arte da guerra de Sun-Tzu, conheça seu inimigo
+			e a sí mesmo."</p>
+		<div style="text-align: right;">
+		<p>
+			<i>"Se você conhece o inimigo e conhece a si mesmo, não precisa
+				temer o resultado de cem batalhas.<br>
+			Se você se conhece mas não conhece o inimigo, para cada
+				vitória ganha sofrerá também uma derrota.<br>
+			Se você não conhece nem o inimigo nem a si mesmo, perderá
+				todas as batalhas."</i>
+		</p>
+		<p><i>Sun-Tzu</i></p>
+		</div>
+		
+		<div style="text-align: center;">
+			<p></p>
+		</div>
+	</div>
+	<div class="row" style="height: 50px; width: 100%"></div>
 	<script src="webjars/jquery/3.1.1/jquery.js"></script>
 	<script src="webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>

@@ -22,6 +22,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		+ "]" + request.getRequestURI() + getParameters(request));
 		if(session.getAttribute("usuarioLogado") == null) {
 			response.sendRedirect("/login");
+			return false;
 		}
 
 		return true;
